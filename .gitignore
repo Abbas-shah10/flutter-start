@@ -1,0 +1,52 @@
+# https://dart.dev
+# Don't commit the following directories and files
+
+# Dart tool cache and generated package files
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+
+# Build outputs
+build/
+
+# Web build outputs (if compiling for web)
+.buildlog
+javascript/
+
+# Documentation generation cache
+doc/api/
+
+# Crash logs and temporary files
+*.log
+*.log.*
+.crashlytics/
+
+# Local IDE configuration files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Sensitive local configurations (API keys/secrets)
+.env
+.env.*
+
+# Android specific
+android/**/.gradle/
+android**/local.properties
+android**/GeneratedPluginRegistrant.java
+
+# iOS / macOS specific
+ios**/.generated/
+macos**/.generated/
+ios**/Pods/
+macos**/Pods/
+ios**/Podfile.lock
+macos**/Podfile.lock
+*.xcworkspace
