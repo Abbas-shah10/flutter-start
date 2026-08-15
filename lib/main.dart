@@ -16,16 +16,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.deepOrangeAccent,
     ),
     body: Center(
-      child: Text(
-        "Hello Ninjas",
-        style: TextStyle(
-          fontSize: 24.0,
-          fontWeight: FontWeight.bold,
-          letterSpacing: 2.0,
-          color: Colors.grey[600],
-          fontFamily: 'IndieFlower',
-        ),
-      ),
+      child: Text("Hello!"),
     ),
     floatingActionButton: FloatingActionButton(
       onPressed: () => {},
