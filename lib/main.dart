@@ -12,12 +12,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isVisible = false;
 
-  void toggleVisibility() {
+ void toggleVisibility() {
     setState(() {
       isVisible = !isVisible;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,12 +29,7 @@ class _HomePageState extends State<HomePage> {
         color: Colors.grey[400],
         width: double.infinity,
         child: Center(
-          child: isVisible
-              ? const Text(
-                  "Hello, I am visible now!",
-                  style: TextStyle(fontSize: 24),
-                )
-              : const Text("Click The Button to see Magic"),
+          child: isVisible ?  Text("HI welcome to my workspace") : Text(''),
         ),
       ),
       floatingActionButton: FloatingActionButton(
