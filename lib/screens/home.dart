@@ -24,12 +24,18 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: Colors.deepOrangeAccent,
       ),
-      body: Container(
-        color: Colors.grey[400],
-        width: double.infinity,
-        child: Center(
-          child: isVisible ?  Text("HI welcome to my workspace") : Text(""),
-        ),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text("username", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight(500)),),
+              ),
+            ],
+          ),
+          TextField(),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.deepOrangeAccent,
