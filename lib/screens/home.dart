@@ -9,13 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isVisible = false;
-
- void toggleVisibility() {
-    setState(() {
-      isVisible = !isVisible;
-    });
-  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,21 +20,34 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 14.0),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Text("username", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight(500)),),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(bottom: 16.0),
+            child: TextField()
+          ),
           Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Text("username", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight(500)),),
-              ),
+              Text("Email", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight(500)),),
             ],
           ),
-          TextField(),
+          Container(
+            margin: EdgeInsets.only(bottom: 16.0),
+            child: TextField()
+          ),
+          SizedBox(
+            child: ElevatedButton(onPressed: () {}, child: Text("Submit"))
+          )
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.deepOrangeAccent,
-        onPressed: toggleVisibility,
-        child: const Text("Click"),
       ),
     );
   }
