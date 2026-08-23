@@ -19,14 +19,16 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Row(
         children: [
-            Expanded(
-              flex: 3,
-              child: Container(
-              padding: EdgeInsets.all(30.0),
-              color: Colors.red,
-              child: Text("1"),
-              ),
-            ),
+          Expanded(flex: 5,child: Image.asset("lib/assets/hotel.png", width: 300, height: 200,)
+          ),
+          Expanded(
+            flex: 3,
+            child: Container(
+            padding: EdgeInsets.all(30.0),
+            color: Colors.red,
+            child: Text("1"),
+          ),
+          ),
           Expanded(
             flex: 3,
             child: Container(
