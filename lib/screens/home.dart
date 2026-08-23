@@ -17,22 +17,31 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: Colors.deepOrangeAccent,
       ),
-      body: Column(
+      body: Row(
         children: [
-          Container(
-            padding: EdgeInsets.all(20.0),
-            color: Colors.blue,
-            child: Text("Text1"),
+            Expanded(
+              flex: 3,
+              child: Container(
+              padding: EdgeInsets.all(30.0),
+              color: Colors.red,
+              child: Text("1"),
+              ),
+            ),
+          Expanded(
+            flex: 3,
+            child: Container(
+              padding: EdgeInsets.all(30.0),
+              color: Colors.blueAccent,
+              child: Text("2"),
+            ),
           ),
-          Container(
-            padding: EdgeInsets.all(30.0),
-            color: Colors.red[300],
-            child: Text("Text2"),
-          ),
-          Container(
-            padding: EdgeInsets.all(40.0),
-            color: Colors.green,
-            child: Text("Text3"),
+          Expanded(
+            flex: 1,
+            child: Container(
+              padding: EdgeInsets.all(30.0),
+              color: Colors.amber,
+              child: Text("3"),
+            ),
           ),
         ],
       ),
