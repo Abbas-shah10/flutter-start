@@ -12,41 +12,50 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        title: const Text("Hello gang!"),
+        title: const Text("Just Info Card",style: TextStyle(color: Colors.white),),
         centerTitle: true,
-        backgroundColor: Colors.deepOrangeAccent,
+        backgroundColor: Colors.grey[850],
       ),
-      body: Row(
-        children: [
-          Expanded(flex: 5,child: Image.asset("lib/assets/hotel.png", width: 300, height: 200,)
-          ),
-          Expanded(
-            flex: 3,
-            child: Container(
-            padding: EdgeInsets.all(30.0),
-            color: Colors.red,
-            child: Text("1"),
-          ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              padding: EdgeInsets.all(30.0),
-              color: Colors.blueAccent,
-              child: Text("2"),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Name",
+             style: TextStyle(
+              color: Colors.grey[300]
+             ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: EdgeInsets.all(30.0),
-              color: Colors.amber,
-              child: Text("3"),
+            SizedBox(height: 10.0,),
+            Text("Abbas",
+             style: TextStyle(
+              color: Colors.yellow,
+              letterSpacing: 2.0,
+              fontSize: 28.0,
+              fontWeight: FontWeight.bold,
+             ),
             ),
-          ),
-        ],
-      ),
+            SizedBox(height: 30.0,),
+            Row(
+              children: [
+                Icon(Icons.email, color: Colors.grey[400]),
+                SizedBox(width: 10.0,),
+                Text("abbaskhanshah10@gmail.com", style: TextStyle(color: Colors.grey[500]),)
+              ],
+            ),
+            SizedBox(height: 30.0,),
+            Row(
+              children: [
+                Icon(Icons.phone, color: Colors.grey[400]),
+                SizedBox(width: 10.0,),
+                Text("+91 3122537050", style: TextStyle(color: Colors.grey[500]),)
+              ],
+            ),
+          ],
+        ),
+      )
     );
   }
 }
