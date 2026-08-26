@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Icon(Icons.phone, color: Colors.grey[400]),
                 SizedBox(width: 10.0,),
-                Text("+91 3122537050", style: TextStyle(color: Colors.grey[500]),)
+                Text("+92 3122537050", style: TextStyle(color: Colors.grey[500]),)
               ],
             ),
           ],
