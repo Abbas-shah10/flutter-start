@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_start/components/bottom_navigation.dart';
+import 'package:flutter_start/components/navbar.dart';
 import 'package:flutter_start/screens/profile.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,14 +15,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[900],
-      appBar: AppBar(
-        title: const Text(
-          "Just Info Card",
-          style: TextStyle(color: Colors.white),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.grey[850],
-      ),
+      appBar: Navbar(),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
         child: Column(
@@ -75,6 +70,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      bottomNavigationBar:  Footer(),
     );
   }
 }
