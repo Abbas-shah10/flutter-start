@@ -5,4 +5,4 @@ import "package:flutter_start/screens/splash.dart";
 void main() => runApp(const MaterialApp(
   debugShowCheckedModeBanner: false, 
   home: SplashScreen()
-  ));
+));

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
-  const Navbar({super.key});
+  final String titles;
+  const Navbar({super.key, required this.titles});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -11,16 +12,18 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[900],
+        foregroundColor: Colors.white,
         titleSpacing: 0,
-        title: Padding(padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ElevatedButton(onPressed: () {}, child: Icon(Icons.add)),
-            ElevatedButton(onPressed: () {}, child: Icon(Icons.notification_add)),
-          ],
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            children: [
+              Text("App"),
+              SizedBox(width: 80,),
+              Text("$titles")
+            ],
+          ),
         ),
-      ),
       ),
     );
   }
