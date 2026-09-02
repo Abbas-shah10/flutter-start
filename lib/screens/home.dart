@@ -13,13 +13,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyAppState extends State<HomePage> {
-  // Tracks the currently selected tab
   int _currentIndex = 0;
 
-  // One title per tab — index matches the BottomNavBar items
   final List<String> _titles = ['Home', 'Search', 'Cart', 'Profile'];
 
-  // One screen per tab — IndexedStack keeps all of them alive
   final List<Widget> _screens = [
     const _HomeContent(),
     const SearchScreen(),
