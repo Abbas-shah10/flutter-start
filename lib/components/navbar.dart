@@ -19,7 +19,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ElevatedButton(onPressed: () {}, child: Icon(Icons.menu)),
               Text("$titles"),
               ElevatedButton(onPressed: () {}, child: Icon(Icons.notification_add))
             ],

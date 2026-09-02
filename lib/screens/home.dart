@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_start/components/bottom_navigation.dart';
 import 'package:flutter_start/components/navbar.dart';
+import 'package:flutter_start/components/product.dart';
 import 'package:flutter_start/screens/cart.dart';
 import 'package:flutter_start/screens/profile.dart';
 import 'package:flutter_start/screens/search.dart';
