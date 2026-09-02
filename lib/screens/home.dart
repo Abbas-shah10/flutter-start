@@ -21,7 +21,7 @@ class _MyAppState extends State<HomePage> {
     const _HomeContent(),
     const SearchScreen(),
     const CartScreen(),
-    const ProfileScreen(name: ''),
+    const ProfileScreen(),
   ];
 
   @override
