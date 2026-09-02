@@ -17,10 +17,11 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("App"),
-              SizedBox(width: 80,),
-              Text("$titles")
+              ElevatedButton(onPressed: () {}, child: Icon(Icons.menu)),
+              Text("$titles"),
+              ElevatedButton(onPressed: () {}, child: Icon(Icons.notification_add))
             ],
           ),
         ),

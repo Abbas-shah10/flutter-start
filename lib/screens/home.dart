@@ -9,101 +9,102 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePage> createState() => _MyAppState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MyAppState extends State<HomePage> {
+  // Tracks the currently selected tab
   int _currentIndex = 0;
 
-  final List<String> _titles = ['Home', 'Cart', 'Search'];
+  // One title per tab — index matches the BottomNavBar items
+  final List<String> _titles = ['Home', 'Search', 'Cart', 'Profile'];
 
-  final List<Widget> _screens = [const HomeContent(), const CartScreen(), const SearchScreen()];
+  // One screen per tab — IndexedStack keeps all of them alive
+  final List<Widget> _screens = [
+    const _HomeContent(),
+    const SearchScreen(),
+    const CartScreen(),
+    const ProfileScreen(name: ''),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: Navbar(titles: _titles[_currentIndex],),
-      body: IndexedStack(index: _currentIndex, children: _screens),
-      bottomNavigationBar: Footer(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+    return MaterialApp(
+      title: 'My App',
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        // Title changes automatically based on the active tab
+        appBar: Navbar(titles: _titles[_currentIndex],),
+
+        // IndexedStack shows only the active screen
+        // but keeps all screens in memory (no rebuild on tab switch)
+        body: IndexedStack(index: _currentIndex, children: _screens),
+
+        bottomNavigationBar: BottomNavBar(
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+        ),
       ),
     );
   }
 }
 
-class HomeContent extends StatefulWidget {
-  const HomeContent({super.key});
+// ── Home tab content ──────────────────────────────────────────────────────────
+// Kept as a private widget inside this file since it belongs to the Home tab.
+class _HomeContent extends StatefulWidget {
+  const _HomeContent();
 
   @override
-  State<HomeContent> createState() => _HomeContentState();
+  State<_HomeContent> createState() => _HomeContentState();
 }
 
-class _HomeContentState extends State<HomeContent> {
+class _HomeContentState extends State<_HomeContent> {
+  String inputName = '';
+  final TextEditingController nameInputController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Name", style: TextStyle(color: Colors.black)),
-                SizedBox(height: 10.0),
-                Text(
-                  "Abbas",
-                  style: TextStyle(
-                    color: Colors.yellow,
-                    letterSpacing: 2.0,
-                    fontSize: 28.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 30.0),
-                Row(
-                  children: [
-                    Icon(Icons.email, color: Colors.grey[400]),
-                    SizedBox(width: 10.0),
-                    Text(
-                      "abbaskhanshah10@gmail.com",
-                      style: TextStyle(color: Colors.grey[500]),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 30.0),
-                Row(
-                  children: [
-                    Icon(Icons.phone, color: Colors.grey[400]),
-                    SizedBox(width: 10.0),
-                    Text(
-                      "+92 3122537050",
-                      style: TextStyle(color: Colors.grey[500]),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 30.0),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MyProfile(name: "Abbas"),
-                        ),
-                      );
-                    },
-                    child: Text("Show"),
-                  ),
-                ),
-              ],
+            padding: const EdgeInsets.all(20.0),
+            child: Text(
+              "Enter Your Name:",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.blue,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextField(controller: nameInputController),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orangeAccent,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () {
+                  setState(() {
+                    inputName = nameInputController.text;
+                  });
+                },
+                child: Text("Submit"),
+              ),
+            ),
+          ),
+          Text('Welcome $inputName.'),
         ],
       ),
     );
