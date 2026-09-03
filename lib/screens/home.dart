@@ -5,6 +5,7 @@ import 'package:flutter_start/components/product.dart';
 import 'package:flutter_start/screens/cart.dart';
 import 'package:flutter_start/screens/profile.dart';
 import 'package:flutter_start/screens/search.dart';
+import 'package:flutter_start/services/api_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,7 +33,7 @@ class _MyAppState extends State<HomePage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         // Title changes automatically based on the active tab
-        appBar: Navbar(titles: _titles[_currentIndex],),
+        appBar: Navbar(titles: _titles[_currentIndex]),
 
         // IndexedStack shows only the active screen
         // but keeps all screens in memory (no rebuild on tab switch)
@@ -64,46 +65,102 @@ class _HomeContentState extends State<_HomeContent> {
   String inputName = '';
   final TextEditingController nameInputController = TextEditingController();
 
+  final Future<List<Product>> _productsFuture = ApiService().fetchProducts();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text(
-              "Enter Your Name:",
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.blue,
-                fontWeight: FontWeight.bold,
+    return Scaffold(
+      appBar: AppBar(title: const Text('E-Commerce Shop')),
+      body: FutureBuilder<List<Product>>(
+        future: _productsFuture,
+        builder: (context, snapshot) {
+          // 1. Check if the network request is still loading
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          // 2. Check if an error occurred during fetching
+          else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
+          // 3. Render the UI once data arrives safely
+          else if (snapshot.hasData) {
+            final products = snapshot.data!;
+            return GridView.builder(
+              padding: const EdgeInsets.all(12),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // Two columns grid
+                childAspectRatio: 0.7, // Layout sizing box control
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextField(controller: nameInputController),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orangeAccent,
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () {
-                  setState(() {
-                    inputName = nameInputController.text;
-                  });
-                },
-                child: Text("Submit"),
-              ),
-            ),
-          ),
-          Text('Welcome $inputName.'),
-        ],
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final product = products[index];
+                return Card(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Product Image Container
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: Image.network(
+                              product.image,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Text metadata blocks
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          product.title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                          vertical: 4,
+                        ),
+                        child: Text(
+                          '\$${product.price.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          }
+
+          return const Center(child: Text('No data found'));
+        },
       ),
     );
   }
