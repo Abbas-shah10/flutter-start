@@ -1,11 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_start/services/user_storage.dart';
 
-class Navbar extends StatelessWidget implements PreferredSizeWidget {
+class Navbar extends StatefulWidget implements PreferredSizeWidget {
   final String titles;
   const Navbar({super.key, required this.titles});
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  @override
+  State<Navbar> createState() => _NavbarState();
+}
+
+class _NavbarState extends State<Navbar> {
+  String name = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUser();
+  }
+
+  Future<void> _loadUser() async {
+    final data = await UserStorage.getUser();
+    if (!mounted) return;
+    setState(() {
+      name = data['name'] ?? '';
+    });
+  }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +43,14 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("$titles"),
-              ElevatedButton(onPressed: () {}, child: Icon(Icons.notification_add))
+              Text(widget.titles),
+              CircleAvatar(
+                backgroundColor: Colors.orangeAccent,
+                child: Text(
+                  name.isNotEmpty ? name[0].toUpperCase() : '?',
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
             ],
           ),
         ),
