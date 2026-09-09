@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_start/screens/home.dart';
+import 'package:flutter_start/screens/user_info_screen.dart';
+import 'package:flutter_start/services/user_storage.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,16 +13,31 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
+   @override
   void initState() {
     super.initState();
-    // Route to home page after 3 seconds
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
-    });
+    _navigate(); // start the navigation logic after splash
+  }
+
+  // Waits 2 seconds, then checks if user data exists in local storage.
+  // Navigates to the correct screen based on the result.
+  Future<void> _navigate() async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (!mounted) return;
+
+    final userExists = await UserStorage.hasUser();
+
+    if (!mounted) return;
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => userExists
+            ? const HomePage() // data found → go to home
+            : const UserInfoScreen(), // no data → ask for info
+      ),
+    );
   }
   @override
   Widget build(BuildContext context) {
