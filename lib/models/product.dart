@@ -19,13 +19,19 @@ class Product {
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      id: json['id'],
-      title: json['title'],
-      price: (json['price'] as num).toDouble(),
-      description: json['description'],
-      category: json['category'],
-      thumbnail: json['thumbnail'],
-      rating: (json['rating'] as num).toDouble(),
+      id: _asInt(json['id']),
+      title: _asString(json['title']),
+      price: _asDouble(json['price']),
+      description: _asString(json['description']),
+      category: _asString(json['category']),
+      thumbnail: _asString(json['thumbnail']),
+      rating: _asDouble(json['rating']),
     );
   }
+
+  static int _asInt(dynamic value) => value is num ? value.toInt() : 0;
+
+  static double _asDouble(dynamic value) => value is num ? value.toDouble() : 0;
+
+  static String _asString(dynamic value) => value is String ? value : '';
 }
