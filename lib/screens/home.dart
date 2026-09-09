@@ -65,13 +65,7 @@ class _HomeContent extends StatefulWidget {
 class _HomeContentState extends State<_HomeContent> {
   // Future holds the in-progress or completed API call
   // Stored in a variable so FutureBuilder doesn't re-fetch on every rebuild
-  late Future<List<Product>> _productsFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _productsFuture = ProductService.getProducts();
-  }
+  final Future<List<Product>> _productsFuture = ProductService.getProducts();
 
   @override
   Widget build(BuildContext context) {
