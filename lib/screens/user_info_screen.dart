@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/screens/home.dart';
-import 'package:flutter_application_2/services/user_storage.dart';
+import 'package:flutter_start/screens/home.dart';
+import 'package:flutter_start/services/user_storage.dart';
 
 class UserInfoScreen extends StatefulWidget {
   const UserInfoScreen({super.key});
@@ -33,7 +33,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => const MyApp()),
+      MaterialPageRoute(builder: (_) => const HomePage()),
     );
   }
 
