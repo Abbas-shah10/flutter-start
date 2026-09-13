@@ -114,7 +114,7 @@ class _CartScreenState extends State<CartScreen> {
         width: size,
         height: size,
         fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) => Container(
+        errorBuilder: (context, error, stackTrace) => Container(
           width: size,
           height: size,
           color: const Color(0xFFFFE5C2),
